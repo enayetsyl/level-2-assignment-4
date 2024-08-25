@@ -6,7 +6,7 @@ type Props = {}
 
 const Services = (props: Props) => {
   return (
-    <div className='lg:h-[70vh] bg-dark-gray w-full '>
+    <div className='lg:h-[60vh] xl:h-[45vh] 2xl:h-[30vh] bg-dark-gray w-full '>
         <div className='lg:max-w-7xl lg:mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-10 md:gap-8 px-5 lg:px-7 '>
             <div className="flex flex-col justify-center items-center gap-3 pt-10 lg:py-5 ">
                 <TbTruckDelivery className="text-light-gold text-6xl"/>

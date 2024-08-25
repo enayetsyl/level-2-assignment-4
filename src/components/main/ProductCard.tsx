@@ -1,16 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from './Button'
+import { Product } from '../../types/type';
 
-type Product = {
-    id : number,
-      name: string,
-      brand: string,
-      quantity: number,
-      price: number,
-      rating: number,
-      image: string,
-}
+
 
 interface ProductProps {
     product: Product;

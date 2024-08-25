@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaCartArrowDown } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 // import { useSelector } from 'react-redux';
@@ -13,9 +13,9 @@ const navItems = [
 ];
 
 const Navbar = () => {
-  // Assuming you have a cart state in your Redux store
+ 
   // const cartItemCount = useSelector((state) => state.cart.items.length);
-  const cartItemCount = 0; // Replace with actual cart count from the Redux store
+  const cartItemCount = 0; 
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -49,19 +49,21 @@ const Navbar = () => {
   return (
     <nav className="bg-medium-black p-4 flex justify-between items-center ">
       <div className="flex items-center lg:max-w-7xl lg:mx-auto justify-between">
-        <Link to="/" className="text-light-gold text-2xl font-bold">
+        <NavLink to="/" className="text-light-gold text-2xl font-bold">
           KeyFusion
-        </Link>
+        </NavLink>
         <div className="hidden md:flex ml-10 space-x-6">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.name}
               to={item.path}
-              className="text-white hover:text-medium-gold"
+              className={({ isActive }) =>
+                `text-white hover:text-medium-gold ${isActive ? 'text-dark-gold font-bold' : ''}`
+              }
               onClick={closeMenu} // Close the menu when a link is clicked
             >
               {item.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </div>
@@ -72,9 +74,9 @@ const Navbar = () => {
           </button>
         </div>
         <div className="relative ml-4">
-          <Link to="/cart" className="text-light-gold hover:text-medium-gold">
+          <NavLink to="/cart" className="text-light-gold hover:text-medium-gold">
             <FaCartArrowDown className="h-6 w-6" />
-          </Link>
+          </NavLink>
           <span className="absolute -top-3 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white  rounded-full">
             {cartItemCount}
           </span>
@@ -83,14 +85,16 @@ const Navbar = () => {
       {isOpen && (
         <div ref={dropdownRef} className="md:hidden absolute top-16 left-0 w-full bg-medium-black p-4 space-y-4">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.name}
               to={item.path}
-              className="block text-white hover:text-medium-gold"
+              className={({ isActive }) =>
+                `text-white hover:text-medium-gold ${isActive ? 'text-dark-gold font-bold' : ''}`
+              }
               onClick={closeMenu} // Close the menu when a link is clicked
             >
               {item.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       )}
