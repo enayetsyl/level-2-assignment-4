@@ -37,17 +37,7 @@
 
   
 
-#### 6\. Product Management/Dashboard Page
 
-*   **Product List Table:**
-    *   Display products in a table format. The table should include columns for the product name, price, brand, and actions.
-*   **Action Buttons:**
-    *   Include buttons for updating and deleting products.
-    *   Updating a product should open a form in a modal allowing the user to modify existing details.
-    *   Deleting a product should open a confirmation modal, asking the user for confirmation before removal.
-*   **Adding a Product:**
-    *   Include a button to create the new product.
-    *   Provide a form to add new products with fields for name, price, description, available quantity, rating, image (you can use ImgBB for image upload or allow direct link entry), and brand.
 
 > All update, delete, and create actions should reflect in real-time, implementing an optimistic update of the UI.
 
