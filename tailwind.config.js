@@ -20,6 +20,15 @@ export default {
         sans: ['Montserrat', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        'fade-in': 'fadeIn 8s ease-in-out',
+      },
     },
   },
   plugins: [],

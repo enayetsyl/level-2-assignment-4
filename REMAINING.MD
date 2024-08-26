@@ -51,14 +51,7 @@
 
 > All update, delete, and create actions should reflect in real-time, implementing an optimistic update of the UI.
 
-#### 7\. About Us Page
 
-- Try to make the About Us page as attractive and creative as possible by using some basic animations and fancy gradients.
-
-#### 8\. Contact Us Page
-
-- Provide detailed contact information and encourage users to reach out with questions or feedback.
-    *   Try to make the page as attractive by using some basic animations.
 
 #### 9\. UI/UX
 
