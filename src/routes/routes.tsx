@@ -11,6 +11,7 @@ import Products from "../pages/main/Products";
 import ProductsDashboard from "../pages/dashboard/ProductsDashboard";
 import AddProduct from "../pages/dashboard/AddProduct";
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
+import Success from "../pages/main/Success";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
         { path: 'products/:productId', element: <SingleProduct/> },
         { path: 'cart', element: <Cart /> },
         { path: 'checkout', element: <Checkout /> },
+        { path: 'success', element: <Success /> },
         { path: 'about-us', element: <AboutUs /> },
         { path: 'contact-us', element: <ContactUs /> },
       ],

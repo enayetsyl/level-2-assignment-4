@@ -29,12 +29,11 @@
 
   
 
-#### **5\. Checkout Page**
+#### **5\. Checkout Page** (QUANTITY DEDUCTION NEED TO IMPLEMENT)
 
-*   **User Details:** Here, you will collect user information such as name, email, phone number, and delivery address.
 *   **Payment Methods:** There will be two types of payment methods:
     1. **Cash on Delivery:** By choosing this option and then clicking the "Place Order" button, the user will be directed to a success page, and the quantity will be deducted from the actual product stock.
-    2. **Stripe (optional):** By choosing this option and then clicking the "Place Order" button, the user will be redirected to the Stripe payment method. After a successful payment, the user will be directed to a success page, and the quantity will be deducted from the actual product stock.
+ 
 
   
 
