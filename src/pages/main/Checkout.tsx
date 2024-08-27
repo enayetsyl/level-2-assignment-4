@@ -1,27 +1,45 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/main/Button";
+import { useCreateOrderMutation } from "../../redux/api/productsApi";
 
 type Props = {};
 
 const Checkout = (props: Props) => {
   const location = useLocation();
-  const { totalValue } = location.state || { totalValue: 0 };
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [mobile, setMobile] = useState('');
+  const { totalValue, items } = location.state || { totalValue: 0 };
+  const [fullName, setFullName] = useState('aaa');
+  const [email, setEmail] = useState('aa');
+  const [address, setAddress] = useState('ff');
+  const [city, setCity] = useState('ddd');
+  const [mobile, setMobile] = useState('ddd');
   const navigate = useNavigate()
   // Check if all fields are filled
   const isFormValid = fullName && email && address && city && mobile;
+  const [createOrder] = useCreateOrderMutation();
 
-  console.log("total value", totalValue);
+  console.log("total value", totalValue, items);
   // Handling order place
 
-  const handleOrderPlace = () => {
-    navigate("/success")
-  }
+  const handleOrderPlace = async () => {
+    try {
+      const order = items.map(item => ({
+        productId: item._id,
+        quantity: item.quantity,
+      }));
+  console.log(order)
+      const result = await createOrder(order).unwrap();
+      console.log(result)
+      console.log(result.data.success)
+      if(result.data.success === false){
+        alert(`${result.data.message}`)
+      }else{
+        navigate("/success");
+      } 
+    } catch (error) {
+      console.error("Failed to place order: ", error);
+    }
+  };
   
   return (
     <div className="min-h-[70vh] bg-white p-5 md:p-10 lg:px-20 lg:py-10">

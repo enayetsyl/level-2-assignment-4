@@ -18,13 +18,11 @@
 #### 4\. Cart Page
 
 *   **Cart Items:**
-    *   List all products that have been added to the cart, along with their quantities.
-    *   Include controls to increase or decrease the quantity of each product.
-    *   Provide a button to remove a product from the cart.
-*   **Pricing Details:**
-    *   Show the detailed total pricing below the product list.
-    *   Update the total price dynamically as products are added, removed, or quantities are changed.
-*   **Proceed To Checkout Button**: Allows the user to place an order.
+ 
+
+
+
+
     *   If the product is in stock, this button will be activated. If the product is out of stock, the button will be deactivated. Clicking this button will take the user to the checkout page.
 
   

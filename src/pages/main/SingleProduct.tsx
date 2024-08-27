@@ -3,21 +3,15 @@ import { useParams } from "react-router-dom";
 import { dummyProducts } from "../../constant";
 import { Product } from "../../types/type";
 import Button from "../../components/main/Button";
+import { useGetProductQuery } from "../../redux/api/productsApi";
 
 type Props = {};
 
 const SingleProduct: React.FC<Props> = () => {
   const { productId } = useParams<{ productId: string }>();
-  const productIdNumber: number = parseInt(productId as string);
+  const {data: {data:product} = {},  error, isLoading, refetch } = useGetProductQuery(productId);
 
-  const [product, setProduct] = useState<Product  | undefined>();
 
-  useEffect(() => {
-    const product = dummyProducts.find(
-      (product) => product.id == productIdNumber
-    );
-    setProduct(product);
-  }, [productIdNumber]);
 
   console.log(product);
 
@@ -25,7 +19,7 @@ const SingleProduct: React.FC<Props> = () => {
     if (!product) return;
 
     // Check if the product is out of stock
-    if (product.quantity <= 0) {
+    if (product?.quantity <= 0) {
       alert("Product is out of stock and cannot be added to the cart.");
       return;
     }
@@ -34,11 +28,11 @@ const SingleProduct: React.FC<Props> = () => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     // Find the product in the cart
-    const existingProduct = cart.find((item: Product) => item.id === product.id);
+    const existingProduct = cart.find((item: Product) => item.id === product?._id);
 
     if (existingProduct) {
       // Check if adding one more exceeds the available stock
-      if (existingProduct.quantity >= product.quantity) {
+      if (existingProduct.quantity >= product?.quantity) {
         alert("You cannot add more than the available stock.");
         return;
       }

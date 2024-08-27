@@ -20,7 +20,7 @@ const Cart = (props: Props) => {
   // Function to handle increasing quantity
   const increaseQuantity = (id: number) => {
     const updatedItems = items.map((item) => {
-      if (item.id === id) {
+      if (item._id === id) {
         return { ...item, quantity: item.quantity + 1 };
       }
       return item;
@@ -32,7 +32,7 @@ const Cart = (props: Props) => {
   // Function to handle decreasing quantity
   const decreaseQuantity = (id: number) => {
     const updatedItems = items.map((item) => {
-      if (item.id === id && item.quantity > 1) {
+      if (item._id === id && item.quantity > 1) {
         return { ...item, quantity: item.quantity - 1 };
       }
       return item;
@@ -59,7 +59,7 @@ const Cart = (props: Props) => {
 
   // Handle checkout navigation
   const handleCheckout = () => {
-    navigate("/checkout", { state: { totalValue } });
+    navigate("/checkout", { state: { totalValue, items } });
   };
 
   return (
@@ -73,7 +73,7 @@ const Cart = (props: Props) => {
       <div>
         {items?.map((item) => (
           <div
-            key={item?.id}
+            key={item?._id}
             className="grid grid-cols-4 gap-5 items-center py-5"
           >
             <img src={item?.image} alt={item.name} />
@@ -81,21 +81,21 @@ const Cart = (props: Props) => {
             <div className="flex justify-center items-center gap-2">
             <button
                 className="bg-dark-gray px-1.5 text-white rounded-full"
-                onClick={() => increaseQuantity(item.id)}
+                onClick={() => increaseQuantity(item._id)}
               >
                 +
               </button>
               <p className="font-bold">{item?.quantity}</p>
               <button
                 className="bg-dark-gray px-1.5 text-white rounded-full"
-                onClick={() => decreaseQuantity(item.id)}
+                onClick={() => decreaseQuantity(item._id)}
               >
                 -
               </button>
             </div>
             <div className="flex flex-col items-end justify-end">
               <p className="justify-end font-bold ">
-                ${parseInt(item?.quantity) * parseInt(item?.price)}
+                ${parseFloat(item?.quantity) * parseFloat(item?.price)}
               </p>
               <button 
               onClick={() => handleProductRemove(item.id)}
