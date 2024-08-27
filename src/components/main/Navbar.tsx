@@ -9,7 +9,7 @@ const navItems = [
   { name: 'Products', path: '/products' },
   { name: 'About Us', path: '/about-us' },
   { name: 'Contact Us', path: '/contact-us' },
-  { name: 'Product Management', path: '/dashboard' },
+  { name: 'Product Management', path: '/dashboard/products' },
 ];
 
 const Navbar = () => {

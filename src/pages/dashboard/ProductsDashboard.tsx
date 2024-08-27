@@ -82,10 +82,22 @@ const ProductsDashboard = (props: Props) => {
       await addProduct(productToSend).unwrap();
       setIsAddModalOpen(false);
       refetch();
+  
+      // Reset the form fields
+      setNewProduct({
+        name: '',
+        price: 0,
+        description: '',
+        quantity: 0,
+        rating: '',
+        image: '',
+        brand: '',
+      });
     } catch (error) {
       console.error("Failed to add product: ", error);
     }
   };
+  
   
   
 
