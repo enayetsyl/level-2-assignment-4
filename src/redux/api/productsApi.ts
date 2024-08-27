@@ -7,9 +7,21 @@ export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/products' }),
   endpoints: (builder) => ({
-    getProducts: builder.query<Product[], void>({
-      query: () => '/get-all-products',
-      providesTags: (result) => result ? [...result.data.map(({id}) => ({type: 'Product', id})), 'Product'] : ['Product'],
+    getProducts: builder.query<Product[], { search?: string, sort?: string, minPrice?: number, maxPrice?: number }>({
+      query: ({ search = '', sort = '', minPrice, maxPrice }) => {
+        let url = `/get-all-products?search=${search}&sort=${sort}`;
+        if (minPrice !== undefined && maxPrice !== undefined) {
+          url += `&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+        }
+        return url;
+      },
+      providesTags: (result) => {
+        if (Array.isArray(result)) {
+          return result.map(({ _id }) => ({ type: 'Product', id: _id }));
+        } else {
+          return ['Product'];
+        }
+      },
     }),
     getProduct: builder.query<any, string>({
       query: (id) => `get-single-product/${id}`,

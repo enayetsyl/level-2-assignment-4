@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactSlider from 'react-slider';
 import { FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 
-const FilterComponent: React.FC = () => {
+type FilterComponentProps = {
+  onSortChange: (sort: string) => void;
+  onPriceRangeChange: (minPrice: number, maxPrice: number) => void;
+};
+
+const FilterComponent: React.FC<FilterComponentProps> = ({ onSortChange, onPriceRangeChange }) => {
   const [priceRange, setPriceRange] = useState<[number, number]>([50, 350]);
   const [sortOrder, setSortOrder] = useState<string>('lowToHigh');
+
+  useEffect(() => {
+    // Call the price range change handler whenever the price range changes
+    onPriceRangeChange(priceRange[0], priceRange[1]);
+  }, [priceRange]);
 
   const handleClearFilters = () => {
     setPriceRange([50, 350]);
     setSortOrder('lowToHigh');
+    onSortChange('lowToHigh');
+    onPriceRangeChange(50, 350); // Reset to default range
+  };
+
+  const handleSortChange = (sort: string) => {
+    setSortOrder(sort);
+    onSortChange(sort);
   };
 
   return (
@@ -23,14 +40,14 @@ const FilterComponent: React.FC = () => {
           <div className="flex space-x-4">
             <button
               className={`flex items-center space-x-2 p-2 rounded ${sortOrder === 'lowToHigh' ? 'bg-medium-gold text-white' : 'bg-gray-200'}`}
-              onClick={() => setSortOrder('lowToHigh')}
+              onClick={() => handleSortChange('lowToHigh')}
             >
               <FaSortAmountDown />
               <span>Price (low to high)</span>
             </button>
             <button
               className={`flex items-center space-x-2 p-2 rounded ${sortOrder === 'highToLow' ? 'bg-medium-gold text-white' : 'bg-gray-200'}`}
-              onClick={() => setSortOrder('highToLow')}
+              onClick={() => handleSortChange('highToLow')}
             >
               <FaSortAmountUp />
               <span>Price (high to low)</span>

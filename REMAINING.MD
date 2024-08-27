@@ -1,52 +1,7 @@
 
-### Detailed Requirements
-
-#### 1\. Homepage / Landing Page
- 
-> Always show the latest 6 created products from your database. hints: You can use the sort method in this case.  (BACKEND INTEGRATION)
-> 
-
-#### 2\. Products Page :
-
-*   **Searching and Filtering:** (AFTER COMPLETING BACKEND)
-    *   A search bar to allow users to search for products by name, brand.
-    *   Filters for product price range.
-    *   Options to sort products by price (low to high and high to low).
-    *   A clear filter button to reset all applied filters. 
-
-
-#### 4\. Cart Page
-
-*   **Cart Items:**
- 
-
-
-
-
-    *   If the product is in stock, this button will be activated. If the product is out of stock, the button will be deactivated. Clicking this button will take the user to the checkout page.
-
-  
-
-#### **5\. Checkout Page** (QUANTITY DEDUCTION NEED TO IMPLEMENT)
-
-*   **Payment Methods:** There will be two types of payment methods:
-    1. **Cash on Delivery:** By choosing this option and then clicking the "Place Order" button, the user will be directed to a success page, and the quantity will be deducted from the actual product stock.
- 
-
-  
-
-
-
-> All update, delete, and create actions should reflect in real-time, implementing an optimistic update of the UI.
-
-
-
-#### 9\. UI/UX
-
-*   **UI/UX Quality**: The user interface should be reasonably good, with wisely chosen color combinations. The user experience should be smooth and intuitive. Consider using UI/UX design principles to enhance the overall aesthetics and usability of the site. There will be a dedicated mark allocated for UI/UX quality.
 *   **Responsiveness**: The entire website must be responsive for both mobile and desktop devices.
 
-  
+  ###CART ICON VALUE CHANGE DYNAMICALLY
 
 ### Bonus Features
 
@@ -57,12 +12,7 @@
 *   **Animations**:
     *   Try to use micro-animations on your website
 
-### Optional Features
 
-*   **Integrate Stripe Payment**: For processing payments.
-*   **Implement Pagination**: In the Products page, with a custom implementation.
-
-_Note: We highly recommend implementing these optional features, as they will make your project stand out._
 
   
 

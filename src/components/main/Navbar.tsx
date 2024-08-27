@@ -13,9 +13,14 @@ const navItems = [
 ];
 
 const Navbar = () => {
- 
-  // const cartItemCount = useSelector((state) => state.cart.items.length);
-  const cartItemCount = 0; 
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(storedCartItems);
+  }, []);
+
+  const cartItemCount = cartItems.length;
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);

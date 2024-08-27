@@ -94,11 +94,12 @@ const Cart = (props: Props) => {
               </button>
             </div>
             <div className="flex flex-col items-end justify-end">
-              <p className="justify-end font-bold ">
-                ${parseFloat(item?.quantity) * parseFloat(item?.price)}
-              </p>
+            <p className="justify-end font-bold ">
+  ${ (parseFloat(item?.quantity) * parseFloat(item?.price)).toFixed(2) }
+</p>
+
               <button 
-              onClick={() => handleProductRemove(item.id)}
+              onClick={() => handleProductRemove(item._id)}
               className="text-red-600 underline text-xs">Remove</button>
             </div>
           </div>
