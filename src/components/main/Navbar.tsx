@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaCartArrowDown } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../redux/features/cartSlice';
+import { RootState } from '../../redux/store';
 // import { useSelector } from 'react-redux';
 
 const navItems = [
@@ -13,12 +16,8 @@ const navItems = [
 ];
 
 const Navbar = () => {
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(storedCartItems);
-  }, []);
+  // Get cart items from Redux state
+  const cartItems = useSelector((state: RootState) => selectCartItems(state));
 
   const cartItemCount = cartItems.length;
 
@@ -88,7 +87,7 @@ const Navbar = () => {
         </div>
       </div>
       {isOpen && (
-        <div ref={dropdownRef} className="md:hidden absolute top-16 left-0 w-full bg-medium-black p-4 space-y-4">
+        <div ref={dropdownRef} className=" absolute top-16 left-0 w-full bg-medium-black p-4 space-y-4 z-20 flex flex-col justify-center items-center">
           {navItems.map((item) => (
             <NavLink
               key={item.name}

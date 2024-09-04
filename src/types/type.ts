@@ -8,3 +8,12 @@ export type Product = {
   image: string;
   description:string;
 };
+
+export interface CartItem extends Product {
+  quantityInCart: number; // Track the quantity of the product in the cart
+}
+
+export interface CartState {
+  items: CartItem[];
+}
+

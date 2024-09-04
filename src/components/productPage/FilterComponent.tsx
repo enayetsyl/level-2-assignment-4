@@ -33,11 +33,11 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ onSortChange, onPrice
       <div className="bg-white shadow-md rounded-lg px-6 py-5">
         <h2 className="text-xl font-semibold mb-5">Filters</h2>
 
-        <div className='flex justify-between items-start'>
+        <div className='flex flex-col justify-between items-start gap-5 lg:gap-0'>
             {/* Sort Options */}
-        <div className="w-2/5 ">
+        <div className="lg:w-2/5 ">
           <label className="block text-sm font-medium mb-2">Sort by</label>
-          <div className="flex space-x-4">
+          <div className="flex flex-col md:flex-row justify-start items-start lg:space-x-4 w-full gap-5 ">
             <button
               className={`flex items-center space-x-2 p-2 rounded ${sortOrder === 'lowToHigh' ? 'bg-medium-gold text-white' : 'bg-gray-200'}`}
               onClick={() => handleSortChange('lowToHigh')}
@@ -55,7 +55,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ onSortChange, onPrice
           </div>
         </div>
 
-      <div className='w-3/5 flex justify-between items-center gap-5'>
+      <div className='lg:w-3/5 w-full flex justify-between items-center gap-5'>
           {/* Price Range Slider */}
           <div className="mb-4 flex-1 ">
           <label className="block text-sm font-medium mb-2">Price range</label>

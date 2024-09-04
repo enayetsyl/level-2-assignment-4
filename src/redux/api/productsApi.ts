@@ -8,7 +8,7 @@ export const productsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/products' }),
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], { search?: string, sort?: string, minPrice?: number, maxPrice?: number }>({
-      query: ({ search = '', sort = '', minPrice, maxPrice }) => {
+      query: ({ search = '', sort = '', minPrice, maxPrice } = {}) => {
         let url = `/get-all-products?search=${search}&sort=${sort}`;
         if (minPrice !== undefined && maxPrice !== undefined) {
           url += `&minPrice=${minPrice}&maxPrice=${maxPrice}`;
@@ -29,7 +29,6 @@ export const productsApi = createApi({
     }),
     addProduct: builder.mutation({
       query: (newProduct) => {
-        console.log('new product', newProduct); // Log the new product data
         return {
           url: '/create-product',
           method: 'POST',
@@ -41,8 +40,7 @@ export const productsApi = createApi({
     
     updateProduct: builder.mutation<Product, Partial<Product>>({
       query: ({_id, ...rest}) => {
-        console.log('id', _id)
-        console.log('rest', rest)
+        
         return{
           url: `/update-product/${_id}`,
         method: 'PUT',
@@ -60,7 +58,6 @@ export const productsApi = createApi({
     }),
     createOrder: builder.mutation({
       query: (order) => {
-        console.log('ordre', order)
         return{
 
           url:'/order',

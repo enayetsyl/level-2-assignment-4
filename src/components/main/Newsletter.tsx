@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import Button from './Button'
+import toast from 'react-hot-toast'
 
 type Props = {}
 
 const Newsletter = (props: Props) => {
   const [email, setEmail] = useState('')
-  console.log('email', email)
   const handleClick = () => {
-    alert("You have successfully subscribe for newsletter.")
+    toast.success("You have successfully subscribe for newsletter.")
+  
     setEmail('')
   }
   

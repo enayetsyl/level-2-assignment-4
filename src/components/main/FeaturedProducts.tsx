@@ -17,7 +17,6 @@ const FeaturedProducts = (props: Props) => {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 6);
 
-  console.log('feature products', sortedProducts);
 
   return (
     <div className="px-4 pt-32">

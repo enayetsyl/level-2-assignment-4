@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Button from '../../components/main/Button';
 import { useAddProductMutation, useDeleteProductMutation, useGetProductQuery, useGetProductsQuery, useUpdateProductMutation } from '../../redux/api/productsApi';
+import toast from 'react-hot-toast';
 
 type Props = {}
 
 const ProductsDashboard = (props: Props) => {
   const {data: {data:products} = {},  error, isLoading, refetch } = useGetProductsQuery();
 
-  console.log('products', products)
   const [addProduct] = useAddProductMutation();
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation()
@@ -57,7 +57,6 @@ const ProductsDashboard = (props: Props) => {
 
   const handleUpdateProduct = async (e) => {
     e.preventDefault()
-    console.log('selected product', selectedProduct)
     await updateProduct(selectedProduct)
     setIsEditModalOpen(false);
     refetch()
@@ -94,7 +93,7 @@ const ProductsDashboard = (props: Props) => {
         brand: '',
       });
     } catch (error) {
-      console.error("Failed to add product: ", error);
+      toast.error(`${error.data.message}`);
     }
   };
   
@@ -113,7 +112,8 @@ const ProductsDashboard = (props: Props) => {
       </button>
 
       {/* Product List Table */}
-      <table className="min-w-full bg-white rounded-lg shadow-lg">
+      <div className="overflow-x-auto w-full">
+      <table className="min-w-full bg-white rounded-lg shadow-lg overflow-x-auto">
         <thead>
           <tr>
             <th className="px-6 py-4 text-left font-bold">Product Name</th>
@@ -152,11 +152,11 @@ const ProductsDashboard = (props: Props) => {
           ))}
         </tbody>
       </table>
-
+      </div>
     {/* Edit Product Modal */}
 {isEditModalOpen && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto py-10">
-    <div className="bg-white p-5 pt-40 rounded-lg shadow-lg w-[80%] lg:w-1/2">  {/* Adjust width if necessary */}
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto py-10 ">
+    <div className="bg-white  mt-10 lg:mt-0 p-5 pt-40 lg:pt-20 rounded-lg shadow-lg w-[80%] lg:w-1/2">  {/* Adjust width if necessary */}
       <h2 className="text-2xl font-bold mb-5">Edit Product</h2>
       <form>
         <div className="mb-4">
@@ -276,7 +276,7 @@ const ProductsDashboard = (props: Props) => {
      {/* Add Product Modal */}
 {isAddModalOpen && (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto py-10">
-    <div className="bg-white p-5 pt-40 rounded-lg shadow-lg my-10 w-[80%] lg:w-1/2">  {/* Adjusted margin top */}
+    <div className="bg-white mt-10 lg:mt-0 p-5 pt-40 lg:pt-20 rounded-lg shadow-lg w-[80%] lg:w-1/2">  {/* Adjusted margin top */}
       <h2 className="text-2xl font-bold mb-5">Add Product</h2>
       <form>
         <div className="mb-4">

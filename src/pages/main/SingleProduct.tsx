@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dummyProducts } from "../../constant";
 import { Product } from "../../types/type";
 import Button from "../../components/main/Button";
 import { useGetProductQuery } from "../../redux/api/productsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, selectCartItems } from "../../redux/features/cartSlice";
+import { RootState } from "../../redux/store";
+import toast from "react-hot-toast";
 
 type Props = {};
 
@@ -11,49 +13,44 @@ const SingleProduct: React.FC<Props> = () => {
   const { productId } = useParams<{ productId: string }>();
   const {data: {data:product} = {},  error, isLoading, refetch } = useGetProductQuery(productId);
 
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => selectCartItems(state));
 
-
-  console.log(product);
 
   const handleAddToCart = () => {
     if (!product) return;
 
     // Check if the product is out of stock
     if (product?.quantity <= 0) {
-      alert("Product is out of stock and cannot be added to the cart.");
+      toast.error("Product is out of stock and cannot be added to the cart.");
       return;
     }
 
     // Get the current cart from local storage or initialize an empty array
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     // Find the product in the cart
-    const existingProduct = cart.find((item: Product) => item.id === product?._id);
+    const existingProduct = cartItems.find((item: Product) => item.id === product?._id);
 
     if (existingProduct) {
       // Check if adding one more exceeds the available stock
       if (existingProduct.quantity >= product?.quantity) {
-        alert("You cannot add more than the available stock.");
+        toast.error("You cannot add more than the available stock.");
         return;
       }
 
       // Increase the quantity if product already exists in the cart
-      existingProduct.quantity += 1;
+      dispatch(addToCart(product));
     } else {
-      // Add the product to the cart with a quantity of 1
-      cart.push({ ...product, quantity: 1 });
+      dispatch(addToCart(product));
     }
-
-    // Save the updated cart back to local storage
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    alert("Product added to the cart!");
+    toast.success("Product added to the cart!");
   };
 
   return (
-    <div className="bg-white flex justify-center items-center gap-5 py-20 px-5">
-      <img src={product?.image} alt={product?.name} className="p-5 w-1/2" />
-      <div className="w-1/2 p-5">
+    <div className="bg-white flex flex-col lg:flex-row justify-center items-center gap-5 py-20 px-5">
+      <img src={product?.image} alt={product?.name} className="p-5 lg:w-1/2" />
+      <div className="lg:w-1/2 p-5">
         <h1 className="font-bold text-3xl pb-2">{product?.name}</h1>
         <div className="flex justify-start items-center gap-5 text-base font-bold">
           <p>${product?.price}</p>
