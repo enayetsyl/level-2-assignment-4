@@ -63,7 +63,8 @@ const cartSlice = createSlice({
     },
     updateQuantity: (state, action: PayloadAction<{ id: number; quantityInCart: number }>) => {
       const { id, quantityInCart } = action.payload;
-      const existingProduct = state.items.find((item) => item._id === id);
+      const existingProduct = state.items.find((item) => item._id === String(id));
+
 
       if (existingProduct) {
         // Ensure the requested quantity doesn't exceed the available stock

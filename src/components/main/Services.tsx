@@ -2,9 +2,8 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FaMoneyBill1Wave } from "react-icons/fa6"
 import { MdSupportAgent } from "react-icons/md";
 
-type Props = {}
 
-const Services = (props: Props) => {
+const Services = () => {
   return (
     <div className='lg:h-[60vh] xl:h-[45vh] 2xl:h-[30vh] bg-dark-gray w-full '>
         <div className='lg:max-w-7xl lg:mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-10 md:gap-8 px-5 lg:px-7 '>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/main/Button";
 import { useCreateOrderMutation } from "../../redux/api/productsApi";
@@ -6,12 +6,22 @@ import { useDispatch } from "react-redux";
 import { clearCart } from "../../redux/features/cartSlice";
 import toast from "react-hot-toast";
 
-type Props = {};
+interface CartItem {
+  _id: string;
+  quantityInCart: number;
+  
+}
 
-const Checkout = (props: Props) => {
+interface BackendError {
+  message: string;
+  errorSources?: Array<{ path: string; message: string }>;
+  stack?: string;
+}
+
+const Checkout = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { totalValue, items } = location.state || { totalValue: 0 };
+  const {  items }:{items: CartItem[]} = location.state || { totalValue: 0 };
   const [fullName, setFullName] = useState('aaa');
   const [email, setEmail] = useState('aa');
   const [address, setAddress] = useState('ff');
@@ -37,8 +47,16 @@ const Checkout = (props: Props) => {
         dispatch(clearCart())
         navigate("/success");
       } 
-    } catch (error) {
-      toast.error(`${error.data.message}`)
+    }   catch (error) {
+      // Using the defined BackendError interface
+      const backendError = error as BackendError;
+  
+      if (backendError?.message) {
+        toast.error(backendError.message);
+        console.log("Error Sources:", backendError.errorSources);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
     }
   };
   

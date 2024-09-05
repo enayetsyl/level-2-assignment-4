@@ -1,10 +1,8 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 import Button from '../../components/main/Button'
 
-type Props = {}
-
-const Success = (props: Props) => {
+const Success = () => {
   return (
     <div className='min-h-[70vh] flex flex-col justify-center items-center'>
       <h1 className='font-bold text-4xl items-center pb-5'>You have successfully placed order.</h1>

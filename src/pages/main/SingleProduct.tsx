@@ -7,11 +7,13 @@ import { addToCart, selectCartItems } from "../../redux/features/cartSlice";
 import { RootState } from "../../redux/store";
 import toast from "react-hot-toast";
 
-type Props = {};
 
-const SingleProduct: React.FC<Props> = () => {
+const SingleProduct = () => {
   const { productId } = useParams<{ productId: string }>();
-  const {data: {data:product} = {},  error, isLoading, refetch } = useGetProductQuery(productId);
+ 
+  const {data: {data: product} = {},   } = useGetProductQuery(productId as string);
+
+
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => selectCartItems(state));
@@ -30,7 +32,7 @@ const SingleProduct: React.FC<Props> = () => {
     // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     // Find the product in the cart
-    const existingProduct = cartItems.find((item: Product) => item.id === product?._id);
+    const existingProduct = cartItems.find((item: Product) => item._id === product?._id);
 
     if (existingProduct) {
       // Check if adding one more exceeds the available stock

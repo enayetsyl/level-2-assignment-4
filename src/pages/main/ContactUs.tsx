@@ -1,8 +1,6 @@
-import React from 'react';
 
-type Props = {}
 
-const ContactUs = (props: Props) => {
+const ContactUs = () => {
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white animate-fade-in py-20">
       <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-center py-5 px-10">

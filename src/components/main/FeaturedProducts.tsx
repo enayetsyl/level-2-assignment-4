@@ -2,19 +2,28 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import ProductCard from "./ProductCard";
 import { useGetProductsQuery } from "../../redux/api/productsApi";
+import { Product } from "../../types/type";
 
-type Props = {};
 
-const FeaturedProducts = (props: Props) => {
-  const { data: { data: products = [] } = {}, error, isLoading, refetch } = useGetProductsQuery({
+
+const FeaturedProducts = () => {
+  const apiResponse = useGetProductsQuery({
     search: '',
     sort: '',
-  });
+  });  // You can directly access `data` here
 
+  // Safely extract the products array from apiResponse.data
+  const products: Product[] = apiResponse?.data?.data || [];
+
+  console.log('products', products);
   // Sort products by creation date in descending order and take the first 6
   const sortedProducts = products
-    .slice() // Create a shallow copy to avoid mutating the original array
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    ?.slice() // Create a shallow copy to avoid mutating the original array
+    .sort((a: Product, b: Product) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return dateB - dateA;
+    })
     .slice(0, 6);
 
 

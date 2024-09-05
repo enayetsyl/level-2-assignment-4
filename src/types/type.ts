@@ -1,5 +1,5 @@
 export type Product = {
-  id: number;
+  _id: string;
   name: string;
   brand: string;
   quantity: number;
@@ -7,6 +7,7 @@ export type Product = {
   rating: number;
   image: string;
   description:string;
+  createdAt?: string; 
 };
 
 export interface CartItem extends Product {
@@ -17,3 +18,8 @@ export interface CartState {
   items: CartItem[];
 }
 
+export interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}

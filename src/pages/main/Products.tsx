@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import SearchBar from '../../components/productPage/SearchBar';
 import FilterComponent from '../../components/productPage/FilterComponent';
 import ProductCard from '../../components/main/ProductCard';
@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/main/Button';
 import { useGetProductsQuery } from '../../redux/api/productsApi';
 
-type Props = {};
 
-const Products = (props: Props) => {
+
+const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('lowToHigh');
   const [priceRange, setPriceRange] = useState<[number, number]>([50, 350]);
 
   // Adjust the destructuring here
-  const { data: { data: products = [] } = {}, error, isLoading, refetch } = useGetProductsQuery({
+  const { data: { data: products = [] } = {},  isLoading, } = useGetProductsQuery({
     search: searchTerm,
     sort: sortOrder,
     minPrice: priceRange[0],
@@ -37,9 +37,6 @@ const Products = (props: Props) => {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error occurred: {error.message}</div>;
-  }
 
   return (
     <div>

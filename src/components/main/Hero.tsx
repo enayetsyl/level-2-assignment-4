@@ -1,8 +1,8 @@
 import heroImage from '/hero.jpg'
 
-type Props = {}
 
-const Hero = (props: Props) => {
+
+const Hero = () => {
   return (
     <div className='w-full h-[80vh] relative'>
         <img src={heroImage} alt="" className='w-full h-full' />

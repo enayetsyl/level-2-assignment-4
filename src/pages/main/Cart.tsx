@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Product } from "../../types/type";
+import  { useEffect } from "react";
 import Button from "../../components/main/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +11,9 @@ import {
 } from "../../redux/features/cartSlice";
 import { RootState } from "../../redux/store";
 
-type Props = {};
 
-const Cart = (props: Props) => {
+
+const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
@@ -106,9 +105,7 @@ const Cart = (props: Props) => {
                 <div className="flex flex-col items-end justify-end">
                   <p className="justify-end font-bold ">
                     $
-                    {(
-                      parseFloat(item?.quantityInCart) * parseFloat(item?.price)
-                    ).toFixed(2)}
+                    {(item?.quantityInCart * item?.price).toFixed(2)}
                   </p>
 
                   <button
