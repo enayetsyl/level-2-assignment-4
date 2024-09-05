@@ -4,7 +4,7 @@ import { ApiResponse, Product } from '../../types/type';
 // Define the API
 export const productsApi = createApi({
   reducerPath: 'productsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/products' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://level-2-assignment-4-backend.vercel.app/api/v1/products' }),
   tagTypes: ['Product'],
   endpoints: (builder) => ({
     getProducts: builder.query<ApiResponse<Product[]>, { search?: string, sort?: string, minPrice?: number, maxPrice?: number  }>({
