@@ -22,11 +22,11 @@ const Checkout = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const {  items }:{items: CartItem[]} = location.state || { totalValue: 0 };
-  const [fullName, setFullName] = useState('aaa');
-  const [email, setEmail] = useState('aa');
-  const [address, setAddress] = useState('ff');
-  const [city, setCity] = useState('ddd');
-  const [mobile, setMobile] = useState('ddd');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [mobile, setMobile] = useState('');
   const navigate = useNavigate()
   // Check if all fields are filled
   const isFormValid = fullName && email && address && city && mobile;
